@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,7 +10,10 @@
 <body>
 <h1>Status</h1>
 <div>
-<a href="/MVCNew/admin/new-user">New user</a>
+<c:forEach items="${userList}" var="user">
+<div><c:out value="${user}"/></div>
+</c:forEach>
 </div>
+<a href="/MVCNew/admin/new-user">New user</a>
 </body>
 </html>

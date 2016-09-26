@@ -1,5 +1,7 @@
 package hu.meiit;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,6 +17,10 @@ public class AdminController {
 	@Autowired
 	private UserManager userManager;
 
+	@ModelAttribute("userList") List<String> getUsers() {
+		return userManager.getUsers();
+	}
+	
 	@RequestMapping("/status")
 	public String status() {
 		return "status";

@@ -28,7 +28,9 @@ public class AdminController {
 	
 	@RequestMapping(value = "/new-user", method=RequestMethod.POST)
 	public String newUserSubmit(@ModelAttribute NewUserRequest newUserRequest) {
-		if (newUserRequest.getUserName().equals("")) {
+		if (newUserRequest.getUserName() == null) {
+			return "newuser";
+		} else if (newUserRequest.getUserName().equals("")) {
 			return "newuser";
 		} else if(newUserRequest.getUserName().equals("Albert")) {
 			return "error";

@@ -8,6 +8,6 @@
 </head>
 <body>
 <h1>Error</h1>
-The new user is Albert.
+There is already a user registered with the given name.
 </body>
 </html>

@@ -1,5 +1,6 @@
 package hu.meiit;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,9 @@ import hu.meiit.model.NewUserRequest;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+	
+	@Autowired
+	private UserManager userManager;
 
 	@RequestMapping("/status")
 	public String status() {
@@ -32,10 +36,13 @@ public class AdminController {
 			return "newuser";
 		} else if (newUserRequest.getUserName().equals("")) {
 			return "newuser";
-		} else if(newUserRequest.getUserName().equals("Albert")) {
-			return "error";
 		} else {
-			return "status";
+			boolean valid = userManager.addUser(newUserRequest.getUserName());
+			if (valid) {
+				return "status";
+			} else {
+				return "error";
+			}
 		}
 	}
 	

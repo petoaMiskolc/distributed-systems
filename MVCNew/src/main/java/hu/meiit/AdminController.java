@@ -1,9 +1,11 @@
 package hu.meiit;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import hu.meiit.model.NewUserRequest;
 
 @Controller
 @RequestMapping("/admin")
@@ -25,8 +27,14 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "/new-user", method=RequestMethod.POST)
-	public String newUserSubmit() {
-		return "newuser";
+	public String newUserSubmit(@ModelAttribute NewUserRequest newUserRequest) {
+		if (newUserRequest.getUserName().equals("")) {
+			return "newuser";
+		} else if(newUserRequest.getUserName().equals("Albert")) {
+			return "error";
+		} else {
+			return "status";
+		}
 	}
 	
 }

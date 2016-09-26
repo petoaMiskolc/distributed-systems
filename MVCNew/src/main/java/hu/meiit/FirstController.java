@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class FirstController {
 
-	@RequestMapping("/")
+	@RequestMapping("/check")
 	public String index() {
 		return "firstView";
 	}

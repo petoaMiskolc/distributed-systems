@@ -16,15 +16,6 @@ public class AdminController {
 	
 	@Autowired
 	private UserManager userManager;
-
-	@ModelAttribute("userList") List<String> getUsers() {
-		return userManager.getUsers();
-	}
-	
-	@RequestMapping("/status")
-	public String status() {
-		return "status";
-	}
 	
 	@RequestMapping("/get-balance")
 	public String getBalance() {
@@ -45,7 +36,7 @@ public class AdminController {
 		} else {
 			boolean valid = userManager.addUser(newUserRequest.getUserName());
 			if (valid) {
-				return "status";
+				return "redirect:/admin/status";
 			} else {
 				return "error";
 			}

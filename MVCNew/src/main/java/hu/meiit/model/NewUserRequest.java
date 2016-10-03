@@ -33,7 +33,11 @@ public class NewUserRequest {
 	}
 
 	public void setColor(List<String> color) {
-		this.color = color;
+		if (color == null) {
+			this.color = new ArrayList<String>();
+		} else {
+			this.color = color;
+		}
 	}
 
 	public String getGender() {

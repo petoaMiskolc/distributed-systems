@@ -47,4 +47,20 @@ public class NewUserRequest {
 	public void setUserName(String uname) {
 		userName = uname;
 	}
+	
+	@Override
+	public String toString() {
+		String result = "Name: " + userName;
+		result += ", Education: " + education;
+		result += ", Gender: " + gender;
+		result += ", Colors: ";
+		for (String c : color) {
+			result += c + ",";
+		}
+		return result;
+	}
+	
+	public boolean containsColor(String c) {
+		return color.stream().anyMatch(color -> color.equals(c));
+	}
 }

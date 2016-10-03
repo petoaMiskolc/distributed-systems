@@ -23,7 +23,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "/new-user", method=RequestMethod.GET)
-	public String newUser() {
+	public String newUser(@ModelAttribute NewUserRequest newUserRequest) {
 		return "newuser";
 	}
 	

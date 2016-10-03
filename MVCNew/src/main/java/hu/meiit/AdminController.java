@@ -42,7 +42,8 @@ public class AdminController {
 			if (valid) {
 				return "redirect:/admin/status";
 			} else {
-				return "error";
+				newUserRequest.setNameAlreadyInUse(true);
+				return "newuser";
 			}
 		}
 	}

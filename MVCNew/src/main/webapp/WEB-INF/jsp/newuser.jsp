@@ -14,8 +14,8 @@
 NewUserRequest newUserRequest = (NewUserRequest)request.getAttribute("newUserRequest");
 %>
 <form method="post">
-Name: 
-<input type="text" name="userName"/><br>
+Name: <%=(newUserRequest.isNameAlreadyInUse()? "(Already in use)":"") %>
+<input type="text" name="userName" value="<%=newUserRequest.getUserName()%>"/><br>
 Education: <select name="education">
 	<option value="elementary" <%=(newUserRequest.getEducation().equals("elementary")? "selected":"") %>>Elementary school</option>
 	<option value="highschool" <%=(newUserRequest.getEducation().equals("highschool")? "selected":"") %>>High school</option>

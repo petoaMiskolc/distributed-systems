@@ -9,13 +9,25 @@ public class NewUserRequest {
 	private String gender;
 	private String education;
 	
+	//Used as feedback by AdminController
+	private boolean nameAlreadyInUse;
+	
 	public NewUserRequest() {
 		userName = "";
 		color = new ArrayList<String>();
 		gender = "";
 		education = "";
+		nameAlreadyInUse=false;
 	}
 	
+	public boolean isNameAlreadyInUse() {
+		return nameAlreadyInUse;
+	}
+
+	public void setNameAlreadyInUse(boolean nameAlreadyInUse) {
+		this.nameAlreadyInUse = nameAlreadyInUse;
+	}
+
 	public List<String> getColor() {
 		return color;
 	}

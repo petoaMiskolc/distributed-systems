@@ -13,7 +13,7 @@ public class StatusController {
 	@Autowired
 	UserManager userManager;
 	
-	@ModelAttribute("userList") List<String> getUsers() {
+	@ModelAttribute("userList") List<User> getUsers() {
 		return userManager.getUsers();
 	}
 	

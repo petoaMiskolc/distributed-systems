@@ -1,6 +1,6 @@
 package hu.meiit;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,7 +34,11 @@ public class AdminController {
 		} else if (newUserRequest.getUserName().equals("")) {
 			return "newuser";
 		} else {
-			boolean valid = userManager.addUser(newUserRequest.getUserName());
+			User user = new User(newUserRequest.getGender(),
+					             newUserRequest.getUserName(),
+					             newUserRequest.getEducation(),
+					             new ArrayList<String>(newUserRequest.getColor()));
+			boolean valid = userManager.addUser(user);
 			if (valid) {
 				return "redirect:/admin/status";
 			} else {

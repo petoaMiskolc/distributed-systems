@@ -10,22 +10,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserManager {
 	
-	private Set<String> users;
+	private Set<User> users;
 	
 	public UserManager() {
-		users = new HashSet<String>();
+		users = new HashSet<User>();
 	}
 
-	public boolean addUser(String name) {
-		if (users.contains(name)) {
+	public boolean addUser(User user) {
+		if (users.stream().anyMatch(u -> u.getName().equals(user.getName()))) {
 			return false;
 		} else {
-			users.add(name);
+			users.add(user);
 			return true;
 		}
 	}
 	
-	public List<String> getUsers() {
-		return new ArrayList<String>(users);
+	public List<User> getUsers() {
+		return new ArrayList<User>(users);
 	}
 }

@@ -17,7 +17,7 @@ public class StatusController {
 		return userManager.getUsers();
 	}
 	
-	@RequestMapping("/admin/status")
+	@RequestMapping("/status")
 	public String status() {
 		return "status";
 	}

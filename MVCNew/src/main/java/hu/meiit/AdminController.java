@@ -40,7 +40,7 @@ public class AdminController {
 					             new ArrayList<String>(newUserRequest.getColor()));
 			boolean valid = userManager.addUser(user);
 			if (valid) {
-				return "redirect:/admin/status";
+				return "redirect:/status";
 			} else {
 				newUserRequest.setNameAlreadyInUse(true);
 				return "newuser";

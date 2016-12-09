@@ -3,36 +3,50 @@ package hu.meiit;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import hu.meiit.model.NewUserRequest;
 
-@Controller
+@RestController
 @RequestMapping("/admin")
 public class AdminController {
+	
+	@JsonFormat(shape = JsonFormat.Shape.OBJECT)
+	public enum ReturnCode { 
+		SUCCESS("success"), EXISTING_NAME("existing-name"), NO_NAME("missing-name"); 
+		
+		private String code;
+		
+		private ReturnCode(String code) {
+			this.code=code;
+		}
+		
+		public String getCode() {
+			return code;
+		}
+	}
+
 	
 	@Autowired
 	private UserManager userManager;
 	
-	@RequestMapping("/get-balance")
-	public String getBalance() {
-		return "balance";
-	}
-	
 	@RequestMapping(value = "/new-user", method=RequestMethod.GET)
-	public String newUser(@ModelAttribute NewUserRequest newUserRequest) {
-		return "newuser";
+	public ReturnCode newUser(@ModelAttribute NewUserRequest newUserRequest) {
+		return newUserSubmit(newUserRequest);
 	}
 	
 	@RequestMapping(value = "/new-user", method=RequestMethod.POST)
-	public String newUserSubmit(@ModelAttribute NewUserRequest newUserRequest) {
+	public ReturnCode newUserSubmit(@ModelAttribute NewUserRequest newUserRequest) {
 		if (newUserRequest.getUserName() == null) {
-			return "newuser";
+			return ReturnCode.NO_NAME;
 		} else if (newUserRequest.getUserName().equals("")) {
-			return "newuser";
+			return ReturnCode.NO_NAME;
 		} else {
 			User user = new User(newUserRequest.getGender(),
 					             newUserRequest.getUserName(),
@@ -40,10 +54,10 @@ public class AdminController {
 					             new ArrayList<String>(newUserRequest.getColor()));
 			boolean valid = userManager.addUser(user);
 			if (valid) {
-				return "redirect:/admin/status";
+				return ReturnCode.SUCCESS;
 			} else {
 				newUserRequest.setNameAlreadyInUse(true);
-				return "newuser";
+				return ReturnCode.EXISTING_NAME;
 			}
 		}
 	}

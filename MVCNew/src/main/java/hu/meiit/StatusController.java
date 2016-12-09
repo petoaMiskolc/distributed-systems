@@ -3,11 +3,12 @@ package hu.meiit;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class StatusController {
 
 	@Autowired
@@ -18,7 +19,7 @@ public class StatusController {
 	}
 	
 	@RequestMapping("/admin/status")
-	public String status() {
-		return "status";
+	public List<User> status() {
+		return userManager.getUsers();
 	}
 }

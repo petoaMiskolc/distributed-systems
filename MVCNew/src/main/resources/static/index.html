@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en" ng-app="adminApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Admin page</title>
+    <script src="angular/angular.js"></script>
+    <script src="angular/angular-resource.js"></script>
+    <script src="angular/angular-route.js"></script>
+    <script src="app.module.js"></script>
+    <script src="app.config.js"></script>
+    <script src="core/core.module.js"></script>
+    <script src="core/admin/admin.module.js"></script>
+    <script src="core/admin/admin.service.js"></script>
+    <script src="status/status.module.js"></script>
+    <script src="status/status.component.js"></script>
+    <script src="new-user/new-user.module.js"></script>
+    <script src="new-user/new-user.component.js"></script>
+  </head>
+  <body>
+
+    <div ng-view></div>
+
+  </body>
+</html>

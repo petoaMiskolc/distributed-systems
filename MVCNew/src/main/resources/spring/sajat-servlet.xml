@@ -1,11 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/integration
+		http://www.springframework.org/schema/integration/spring-integration.xsd">
+		
+	<int:channel id="userRequest"/>
+	<int:channel id="result"/>
+	<int:channel id="newuser1"/>
+	<int:channel id="newuser2"/>
+	<int:channel id="emptyname"/>
+	<int:channel id="register"/>
+	
+	<int:gateway id="simpleGateway"
+			service-interface="hu.meiit.si.UserAdder"
+			default-request-channel="userRequest"
+			default-reply-channel="result" />
+			
+	<int:transformer input-channel="userRequest" output-channel="newuser1" method="create" ref="creator" />
+	<int:transformer input-channel="newuser1" output-channel="newuser2" method="check" ref="creator" />
+	<int:payload-type-router input-channel="newuser2">
+		<int:mapping type="hu.meiit.si.RegistrationResult" channel="result"/>
+		<int:mapping type="hu.meiit.User" channel="register"/>
+	</int:payload-type-router>
+	<int:transformer input-channel="register" output-channel="result" method="register" ref="creator"/>
+	
 	<context:component-scan base-package="hu.meiit" />
 	<context:annotation-config></context:annotation-config>
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/"/>
 		<property name="suffix" value=".jsp"/>
 	</bean>
+
+	<bean class="hu.meiit.si.UserCreator" id="creator"></bean>
 </beans>

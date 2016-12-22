@@ -28,4 +28,12 @@ public class UserManager {
 	public List<User> getUsers() {
 		return new ArrayList<User>(users);
 	}
+	
+	public boolean isNameInUse(String name) {
+		if (users.stream().anyMatch(u -> u.getName().equals(name))) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

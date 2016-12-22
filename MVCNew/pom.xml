@@ -16,25 +16,32 @@
     </dependency>
     <dependency>
         <groupId>org.springframework</groupId>
-        <artifactId>spring-webmvc</artifactId>    
+        <artifactId>spring-webmvc</artifactId>
+        <version>4.0.5.RELEASE</version>    
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-core</artifactId>
+        <version>4.0.5.RELEASE</version>    
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>4.0.5.RELEASE</version>    
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.integration</groupId>
+        <artifactId>spring-integration-core</artifactId>
+        <version>4.0.5.RELEASE</version>    
     </dependency>
     <dependency>
     	<groupId>jstl</groupId>
     	<artifactId>jstl</artifactId>
     	<version>1.2</version>
     </dependency>
+
   </dependencies>
-<dependencyManagement>
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-framework-bom</artifactId>
-			<version>4.0.5.RELEASE</version>
-			<type>pom</type>
-			<scope>import</scope>
-		</dependency>
-	</dependencies>
-</dependencyManagement>
+
   <build>
     <finalName>MVCNew</finalName>
         <plugins>

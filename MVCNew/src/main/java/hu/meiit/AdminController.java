@@ -7,27 +7,28 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import hu.meiit.model.NewUserRequest;
 
 @Controller
-@RequestMapping("/admin")
 public class AdminController {
 	
 	@Autowired
 	private UserManager userManager;
 	
-	@RequestMapping("/get-balance")
+	@RequestMapping("/admin/get-balance")
 	public String getBalance() {
 		return "balance";
 	}
 	
-	@RequestMapping(value = "/new-user", method=RequestMethod.GET)
+	@RequestMapping(value = "/admin/new-user", method=RequestMethod.GET)
 	public String newUser(@ModelAttribute NewUserRequest newUserRequest) {
 		return "newuser";
 	}
 	
-	@RequestMapping(value = "/new-user", method=RequestMethod.POST)
+	@RequestMapping(value = "/admin/new-user", method=RequestMethod.POST)
 	public String newUserSubmit(@ModelAttribute NewUserRequest newUserRequest) {
 		if (newUserRequest.getUserName() == null) {
 			return "newuser";
@@ -46,6 +47,12 @@ public class AdminController {
 				return "newuser";
 			}
 		}
+	}
+	
+	//Spring Security see this :
+	@RequestMapping(value = "/adminLogin", method = RequestMethod.GET)
+	public String login() {
+		return "login";
 	}
 	
 }
